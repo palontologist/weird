@@ -1,4 +1,17 @@
 import Image from 'next/image'
+async function getData (){
+  const url = await fetch (
+    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+    {
+      headers: {
+        accept:"application/json",
+        authorization:process.env.MOVIEDB_API as string,
+
+      },
+    }
+  );
+  return url.json();
+}
 
 export default function Home() {
   return (
