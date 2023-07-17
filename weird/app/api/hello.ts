@@ -16,9 +16,11 @@ export default async function handler (
             },
 
         ],
+        
     });
     const responseText = completion.data.choices[0].message?.content;
 
-
-  return  res.status(200).json({responseText});
+   return ( res.status(200).json({responseText})
+   );
+   
 }
