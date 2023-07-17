@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react';
+
 import { getChatResponse } from "./api/api";
 
 async function getData (){
@@ -14,16 +14,7 @@ async function getData (){
     }
   );
 
-  const [message, setMessage] = useState("");
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    const response = getChatResponse(message);
-    console.log(response);
-  };
+ 
 
 
   return url.json();
@@ -37,15 +28,7 @@ export default function Home() {
         <h2 className='mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl'>
              Top Trending Movies
         </h2>
-        <div>
-      <input
-        type="text"
-        placeholder="Enter a message"
-        value={message}
-        onChange={handleChange}
-      />
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+        
 
       </div>
     </div>
