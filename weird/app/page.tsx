@@ -1,4 +1,7 @@
 import Image from 'next/image'
+import { getChatResponse } from "./api/api";
+import { useState } from 'react';
+
 async function getData (){
   const url = await fetch (
     "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
@@ -10,6 +13,19 @@ async function getData (){
       },
     }
   );
+
+  const [message, setMessage] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    const response = getChatResponse(message);
+    console.log(response);
+  };
+
+
   return url.json();
 }
 
