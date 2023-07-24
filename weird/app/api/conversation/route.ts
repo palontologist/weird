@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
 
-const Configuration = new Configuration ({
-    apikey:process.env.OPENAI_API,
+const configuration = new Configuration ({
+    apikey: process.env.OPENAI_API,
 });
 
 const openai = new OpenAIApi (configuration);
@@ -24,13 +24,12 @@ export async function POST (
         messages
      });
 
-     return NextResponse.json(response.data.choices[0].message)
+     return NextResponse.json(response.data.choices[0].message);
    
-
 
     } catch (error) { 
         console.log("[CONVERSATION_ERROR]", error);
-        return new NextResponse {"Internal error", { status:500}}
+        return new NextResponse ( "Internal error", { status:500 });
     }
     
-}
+};
