@@ -1,5 +1,10 @@
 "use client";
-
+import { BotAvatar } from "@/components/bot-avatar",
+import {UserAvatar} from "@/components/user-avatar",
+import { cn } from "@/lib/utils";
+import { ChatCompletionRequestMessage } from "openai";
+import { useState } from "react"
+import { useRouter } from "next/navigation";
 import { Form,FormField,FormControl,FormItem } from "@/components/ui/form";
 import { Input } from  "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,6 +35,8 @@ async function getData (){
 }
 
 export default function Home() {
+  const router = useRouter(); 
+  const [messages, setmessages ] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm <z.infer<typeof formSchema>>({
     resolver:zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +46,26 @@ export default function Home() {
   
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values:z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
+    try {
+      const userMessage: ChatCompletionRequestMessage = { 
+        role:"user",
+        content:values.prompt,
+
+      };
+      const newMessages = [...messages, userMessage];
+      const response = await axios.post("/api/conversation", { messages: newMessages });
+      setMessages = ((current) => [...current, userMessage,response.data]);
+      form.reset();  
+
+
+    } catch (error:any) {
+      console.log(error);
+    } finally {
+      router.refresh();
+    }
+
+    }
+    
   
   return (
    <div className='bg-white py-6 sn:py-8 lg:py-12 '>
@@ -59,7 +84,7 @@ export default function Home() {
                 rounded-lg
                 border
                 w-full
-                p-4
+                p-4fcv
                 px-3
                 md:px-6
                 focus-within:shadow-sm
@@ -76,20 +101,38 @@ export default function Home() {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading} 
-                        placeholder="What SDGs can I impact from my passions, skills and education?" 
+                         placeholder="What SDGs can I impact from my passions, skills and education?" 
                         {...field}
                       />
                     </FormControl>
                   </FormItem>
                 )}
                />
-               <Button className="col-span-32 lg:col-span-2">
+               <Button className="col-span-32 lg:col-span-2 w-full"disabled={isLoading}>
                  Generate
                </Button>
                </form>   
              </Form>
+
           </div>
-            
+            <div className="flex flex-col-reverse gap-y-4">
+              {messages.map((message) => (
+                <div 
+                key={message.content}
+                className={cn(
+                  "p-8 w -full flex items-start gap-x-8 rounded-lg",
+                  message.role === "user" ? "bg-white border border-black/10" : "bg-muted",
+                )}
+                 >
+                  {message.role === "user"? <UseAvatar /> : <BotAvatar />}
+                  <p className="text-sm">
+                    {message.content}
+                  </p>
+                  </div>
+              ))}
+              
+              
+            </div>
 
 
         </div>
