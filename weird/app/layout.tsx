@@ -6,8 +6,8 @@ import Link from 'next/link'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'weird',
-  description: 'ET GAME for developers',
+  title: 'frontforumfocus',
+  description: 'Connecting individuals and organizations for a sustainable future',
 }
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <nav className="px-10 pt-5">
           <Link href="/"className='text=2xl font-semifold'>
-           IMDEAD <span className='text-teal-500'> DB</span>
+           frontforumfocus <span className='text-teal-500'> F3</span>
           </Link>
         </nav>
         {children}</body>
