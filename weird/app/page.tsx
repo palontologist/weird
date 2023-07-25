@@ -3,7 +3,7 @@ import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
 import { ChatCompletionRequestMessage } from "openai";
-import { useState } from "react"
+import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, useState } from "react"
 import { useRouter } from "next/navigation";
 import { Form,FormField,FormControl,FormItem } from "@/components/ui/form";
 import { Input } from  "@/components/ui/input";
@@ -12,31 +12,12 @@ import * as z from "zod";
 import axios from "axios";
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getChatResponse } from "./api/api";
 import { useForm } from "react-hook-form";
 
 
-async function getData (){
-  const url = await fetch (
-    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
-    {
-      headers: {
-        accept:"application/json",
-        authorization:process.env.MOVIEDB_API as string,
-
-      },
-    }
-  );
-
-  
-
-
-  return url.json();
-}
-
-export default function Home() {
+const Home = () => {
+  const [messages, setMessages ] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter(); 
-  const [messages, setmessages ] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm <z.infer<typeof formSchema>>({
     resolver:zodResolver(formSchema),
     defaultValues: {
@@ -52,9 +33,16 @@ export default function Home() {
         content:values.prompt,
 
       };
+
+      const [messages, setMessages ] = useState<ChatCompletionRequestMessage[]>([]);
       const newMessages = [...messages, userMessage];
-      const response = await axios.post("/api/conversation", { messages: newMessages });
-      setMessages = ((current) => [...current, userMessage,response.data]);
+
+      const response = await axios.post("/api/conversation", { 
+        messages: newMessages
+       });
+
+      setMessages((current) => [...current, userMessage, response.data]);
+
       form.reset();  
 
 
@@ -115,33 +103,38 @@ export default function Home() {
              </Form>
 
           </div>
-            <div className="flex flex-col-reverse gap-y-4">
-              {messages.map((message) => (
-                <div 
-                key={message.content}
+
+          <div className="space-y-4 mt-4">
+          {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+             
+            </div>
+          )}
+          
+          <div className="flex flex-col-reverse gap-y-4">
+            {messages.map((message) => (
+              <div 
+                key={message.content} 
                 className={cn(
-                  "p-8 w -full flex items-start gap-x-8 rounded-lg",
+                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
                   message.role === "user" ? "bg-white border border-black/10" : "bg-muted",
                 )}
-                 >
-                  {message.role === "user"? <UseAvatar /> : <BotAvatar />}
-                  <p className="text-sm">
-                    {message.content}
-                  </p>
-                  </div>
+              >
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p className="text-sm">
+                  {message.content}
+                </p>
+              </div>
               ))}
               
               
             </div>
-
-
-        </div>
-        
-
       </div>
     </div>
    </div>
-
+  </div>
+  </div>
    
-  )
+  );
 }
+export default Home;
