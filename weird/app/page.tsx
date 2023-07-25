@@ -1,4 +1,5 @@
 "use client";
+
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,8 @@ import { useForm } from "react-hook-form";
 const Home = () => {
   const [messages, setMessages ] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter(); 
+ 
+  
   const form = useForm <z.infer<typeof formSchema>>({
     resolver:zodResolver(formSchema),
     defaultValues: {
@@ -26,33 +29,31 @@ const Home = () => {
   });
   
   const isLoading = form.formState.isSubmitting;
-  const onSubmit = async (values:z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const userMessage: ChatCompletionRequestMessage = { 
         role:"user",
-        content:values.prompt,
+        content: values.prompt
 
       };
 
-      const [messages, setMessages ] = useState<ChatCompletionRequestMessage[]>([]);
+      
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", { 
-        messages: newMessages
-       });
+      const response = await axios.post('/api/conversation', { messages: newMessages });
 
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();  
 
 
-    } catch (error:any) {
-      console.log(error);
+    } catch (error: any) {
+      
     } finally {
       router.refresh();
     }
 
-    }
+  }
     
   
   return (
@@ -105,25 +106,10 @@ const Home = () => {
           </div>
 
           <div className="space-y-4 mt-4">
-          {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-             
-            </div>
-          )}
-          
-          <div className="flex flex-col-reverse gap-y-4">
+            <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
-              <div 
-                key={message.content} 
-                className={cn(
-                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
-                  message.role === "user" ? "bg-white border border-black/10" : "bg-muted",
-                )}
-              >
-                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm">
-                  {message.content}
-                </p>
+              <div key={message.content}>
+                
               </div>
               ))}
               
