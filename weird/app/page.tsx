@@ -40,7 +40,7 @@ const Home = () => {
       
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post('/api/conversation', { messages: newMessages });
+      const response = await axios.post("/api/conversation", { messages: newMessages, });
 
       setMessages((current) => [...current, userMessage, response.data]);
 
@@ -109,11 +109,10 @@ const Home = () => {
             <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div key={message.content}>
-                
+                {message.content}
               </div>
+              
               ))}
-              
-              
             </div>
       </div>
     </div>
