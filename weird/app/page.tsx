@@ -60,10 +60,9 @@ const Home = () => {
    <div className='bg-white py-6 sn:py-8 lg:py-12 '>
     <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
       <div className='mb-10 md:mb-16'>
-        <h2 className='mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl'>
-             Make Impact Now
-        </h2>
-
+      <div className="text-center"> 
+      <h2 className="text-4xl font-bold tracking-tight mb-4 lg:text-4xl"> frontforumfocus<span className="text-indigo-600">Focus</span> </h2> <p className="text-3xl font-bold tracking-tight">
+         Connecting individuals and organizations working to achieve sustainable development goals through community initiatives, marketplace, and educational resources. </p> </div>
         <div className="px-4 lg:px-8">
           <div>
              <Form {...form}> 
