@@ -25,7 +25,10 @@ export default function RootLayout({
            frontforumfocus <span className='text-teal-500'> F3</span>
           </Link>
         </nav>
-        {children}</body>
+        <main className="dark:bg-black dark:text-gray-100 min-h-screen">
+        {children}
+        </main>
+        </body>
     </html>
     </ClerkProvider>
   )
