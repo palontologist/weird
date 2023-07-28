@@ -1,6 +1,6 @@
 "use client";
 
-import { UserButton } from "@clerk/nextjs";
+
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
@@ -58,12 +58,11 @@ const Home = () => {
     
   
   return (
+
     <section className="text-gray-600 body-font">
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-col text-center w-full mb-20">
-      <div>
-      <UserButton afterSignOutUrl="/"/>
-      </div>
+      
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
         Connect, educate, and empower
         </h1>
@@ -125,10 +124,11 @@ const Home = () => {
               
               ))}
             </div>
+      
       </div>
     </div>
    </div>
-   </section>
+  </section>
 
    
   );
