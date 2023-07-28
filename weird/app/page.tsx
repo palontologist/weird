@@ -57,12 +57,20 @@ const Home = () => {
     
   
   return (
-   <div className='bg-white py-6 sn:py-8 lg:py-12 '>
-    <div className='mx-auto max-w-screen-2xl px-4 md:px-8'>
-      <div className='mb-10 md:mb-16'>
-      <div className="text-center"> 
-      <h2 className="text-4xl font-bold tracking-tight mb-4 lg:text-4xl"> frontforumfocus<span className="text-indigo-600">Focus</span> </h2> <p className="text-3xl font-bold tracking-tight">
-         Connecting individuals and organizations working to achieve sustainable development goals through community initiatives, marketplace, and educational resources. </p> </div>
+    <section className="text-gray-600 body-font">
+    <div className="container px-5 py-24 mx-auto">
+      <div className="flex flex-col text-center w-full mb-20">
+        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+        Connect, educate, and empower
+        </h1>
+        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
+          connecting people working to achieve sustainable development,
+          goals through community initiatives, marketplace and
+          educational resources.
+          Make impact now.
+        </p>
+      </div>
+      
         <div className="px-4 lg:px-8">
           <div>
              <Form {...form}> 
@@ -116,8 +124,8 @@ const Home = () => {
       </div>
     </div>
    </div>
-  </div>
-  </div>
+   </section>
+
    
   );
 }
