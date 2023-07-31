@@ -1,9 +1,9 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
-import { ClerkProvider } from '@clerk/nextjs'
-
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import Link from 'next/link';
+import { ClerkProvider } from '@clerk/nextjs';
+import { Navbar } from "@/components/navbar"; 
+import { ThemeProvider} from '@/components/theme-provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -14,22 +14,24 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+   children: React.ReactNode
 }) {
   return (
+    <div className="h-full">
     <ClerkProvider>
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <nav className="px-10 pt-5">
-          <Link href="/"className='text=2xl font-semifold'>
-           frontforumfocus <span className='text-teal-500'> F3</span>
-          </Link>
-        </nav>
-        <main className="dark:bg-black dark:text-gray-100 min-h-screen">
+       
+        <main className="md:pl-20 dark:bg-black dark:text-gray-100 min-h-screen">
+        < Navbar />
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         {children}
+        </ThemeProvider>
         </main>
         </body>
     </html>
     </ClerkProvider>
+    </div>
+    
   )
 }
