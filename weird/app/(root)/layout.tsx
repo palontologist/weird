@@ -1,4 +1,4 @@
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "@/components/navbar";
 
 const RootLayout = ({
     children,
@@ -17,4 +17,4 @@ const RootLayout = ({
   );
 }
 
-export default RootLayout
+export default RootLayout;
