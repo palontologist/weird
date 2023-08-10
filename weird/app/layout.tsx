@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ClerkProvider } from '@clerk/nextjs';
 import { Navbar } from "@/components/navbar"; 
 import { ThemeProvider} from '@/components/theme-provider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,22 +17,17 @@ export default function RootLayout({
 }: {
    children: React.ReactNode
 }) {
-  return (
-    <div className="h-full">
-    <ClerkProvider>
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-       
-        <main className="md:pl-20 dark:bg-black dark:text-gray-100 min-h-screen">
-        < Navbar />
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+  return (    
+ 
+   <html lang="en" suppressHydrationWarning>
+    <body className={cn("bg-secondary", inter.className)}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         {children}
-        </ThemeProvider>
-        </main>
-        </body>
-    </html>
-    </ClerkProvider>
+      </ThemeProvider>
+    </body>
+   </html>
   
+    
     
   )
 }
