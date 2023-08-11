@@ -1,10 +1,8 @@
 "use client";
 
-import {Menu, Sparkles } from "locide-react";
+import {Menu, Sparkles } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
-
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 
@@ -33,8 +31,7 @@ export const Navbar=(props: any) =>{
             <Sparkles className="h-4 w-4 fill-white text-white ml-2" />
           </Button> 
           <ModeToggle />
-          <UserButton />
-        
+
         
         </div>
         </div>

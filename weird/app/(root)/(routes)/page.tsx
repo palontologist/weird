@@ -1,6 +1,5 @@
 "use client";
 
-
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
