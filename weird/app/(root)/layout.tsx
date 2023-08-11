@@ -1,19 +1,17 @@
 import { Navbar } from "@/components/navbar";
 
 const RootLayout = ({
-    children,
+    children
 }: {
     children: React.ReactNode;
 }) => {
-
     return (
-    <div className="h-full">
+     <div className="h-full">
         <Navbar />
-        
-        <main className="md:pl-20 pt-16 h-full">
+      <main className="md:pl-20 pt-16 h-full">
         {children}
-        </main>
-        </div>
+      </main>
+     </div>
     
   );
 }

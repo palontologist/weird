@@ -9,11 +9,14 @@ import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 
-const font = Poppins({ weight: "600", subsets: ["latin"] });
+const font = Poppins({ 
+  weight: "600",
+   subsets: ["latin"] 
+  });
 
 export const Navbar=(props: any) =>{
-    return (
-        <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 h-16 border-b border-primary/10 bg-secondary">
+  return (
+     <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary">
         <div className="flex items-center">
           <Menu className="block md:hidden" /> 
         <Link href="/"> 
