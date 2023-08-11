@@ -8,6 +8,7 @@ import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 
 
 const font = Poppins({ weight: "600", subsets: ["latin"] });
@@ -31,8 +32,9 @@ export const Navbar = ()  =>  {
             Upgrade
             <Sparkles className="h-4 w-4 fill-white text-white ml-2" />
           </Button>
-        )
+        
         <ModeToggle />
+        <UserButton afterSignOutUrl="/" />
        
       </div>
     </div>
