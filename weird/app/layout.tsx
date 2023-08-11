@@ -1,33 +1,36 @@
-import { cn } from "@/lib/utils";
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Link from 'next/link';
-import { Navbar } from "@/components/navbar"; 
-import { ThemeProvider} from '@/components/theme-provider'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+
+
+import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/theme-provider'
+
+
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'frontforumfocus',
-  description: 'Connecting individuals and organizations for a sustainable future',
+  description: 'connecting people working SDGS',
 }
 
 export default function RootLayout({
   children,
 }: {
-   children: React.ReactNode
+  children: React.ReactNode
 }) {
-  return (    
+  return (
  
-   <html lang="en" suppressHydrationWarning>
-    <body className={cn("bg-secondary", inter.className)}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
-      </ThemeProvider>
-    </body>
-   </html>
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn("bg-secondary", inter.className)}>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+           
+            {children}
+            
+          </ThemeProvider>
+        </body>
+      </html>
   
-    
-    
   )
 }
