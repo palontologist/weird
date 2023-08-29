@@ -1,6 +1,5 @@
 "use client";
 
-
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
@@ -25,23 +24,18 @@ const Home = () => {
   const form = useForm <z.infer<typeof formSchema>>({
     resolver:zodResolver(formSchema),
     defaultValues: {
-      prompt:""
+      prompt: ""
     }
   });
   
   const isLoading = form.formState.isSubmitting;
+  
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: ChatCompletionRequestMessage = { 
-        role:"user",
-        content: values.prompt
-
-      };
-
-      
+      const userMessage: ChatCompletionRequestMessage = { role:"user", content: values.prompt };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", { messages: newMessages, });
+      const response = await axios.post('/api/conversation', { messages: newMessages }, {timeout: 100000, });
 
       setMessages((current) => [...current, userMessage, response.data]);
 
@@ -63,8 +57,8 @@ const Home = () => {
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-col text-center w-full mb-20">
       
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-        Connect, educate, and empower
+        <h1 className="sm:text-3xl text-4xl font-bold text-center title-font mb-4 text-gray-900[text-wrap:balance]">
+        Connect, Educate, and Empower
         </h1>
         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
           connecting people working to achieve sustainable development,
@@ -107,19 +101,22 @@ const Home = () => {
                   </FormItem>
                 )}
                />
-               <Button className="col-span-32 lg:col-span-2 w-full"disabled={isLoading}>
-                 Generate
-               </Button>
-               </form>   
-             </Form>
-
+              <Button className="col-span-12 lg:col-span-2 w-full" type="submit" disabled={isLoading} size="icon">
+                Generate
+              </Button>
+             </form>   
+            </Form>
           </div>
-
-          <div className="space-y-4 mt-4">
-            <div className="flex flex-col-reverse gap-y-4">
+        <div className="space-y-4 mt-4">
+         <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
-              <div key={message.content}>
-                {message.content}
+              <div
+                key={message.content}>
+                 
+                 
+                <p className="text-sm">
+                 {message.content}
+                </p>
               </div>
               
               ))}

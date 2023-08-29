@@ -3,9 +3,13 @@ import {  Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
-  });
+});
   
   const openai = new OpenAIApi(configuration);
+  const instructionMessage: ChatCompletionRequestMessage = {
+  role: "system",
+  content: "You are an SDG assistant suggest the SDGs one can impact most using their education,skills and passions."
+};
 
 export async function POST (
     req: Request
@@ -20,7 +24,7 @@ export async function POST (
      }
      const response = await openai.createChatCompletion ({
         model:"gpt-3.5-turbo",
-        messages
+        messages: [instructionMessage, ...messages]
      });
 
      return NextResponse.json(response.data.choices[0].message);
