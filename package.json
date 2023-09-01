@@ -3,5 +3,8 @@
     "axios": "^1.4.0",
     "openai": "^3.3.0",
     "openapi": "^1.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.2.0"
   }
 }
