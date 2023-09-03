@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@prisma/client": "^5.2.0",
     "axios": "^1.4.0",
     "openai": "^3.3.0",
     "openapi": "^1.0.1"
