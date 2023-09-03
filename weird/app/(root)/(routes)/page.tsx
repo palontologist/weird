@@ -1,5 +1,7 @@
 "use client";
-
+import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
+import { initialProfile } from "@/lib/initial-profile";
 import { BotAvatar } from "@/components/bot-avatar";
 import {UserAvatar} from "@/components/user-avatar";
 import { cn } from "@/lib/utils";
@@ -19,8 +21,7 @@ import { useForm } from "react-hook-form";
 const Home = () => {
   const [messages, setMessages ] = useState<ChatCompletionRequestMessage[]>([]);
   const router = useRouter(); 
- 
-  
+
   const form = useForm <z.infer<typeof formSchema>>({
     resolver:zodResolver(formSchema),
     defaultValues: {
@@ -50,7 +51,21 @@ const Home = () => {
 
   }
     
-  
+  const profile = await initialProfile();
+  const server = await db.server.findFirst({
+    where: {
+      members: {
+        some: {
+          profileId: profile.id
+        }
+      }
+    }
+  });
+
+  if (server ) {
+    return redirect ('/servers/${server.id}');
+  }
+ 
   return (
 
     <section className="text-gray-600 body-font">
