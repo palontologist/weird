@@ -51,6 +51,7 @@ const Home = () => {
 
   }
     
+  const someAsyncFunction = async () => {
   const profile = await initialProfile();
   const server = await db.server.findFirst({
     where: {
@@ -61,6 +62,7 @@ const Home = () => {
       }
     }
   });
+};
 
   if (server ) {
     return redirect ('/servers/${server.id}');
